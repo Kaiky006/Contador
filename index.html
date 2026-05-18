@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosso Amor 💕</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 25px;
+      padding: 25px 18px 30px;
+      width: 92%;
+      max-width: 420px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      color: white;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.4rem;
+      margin-bottom: 5px;
+    }
+
+    .nomes {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+
+    .contador {
+      font-size: 1.3rem;
+      font-weight: 600;
+      background: rgba(255,255,255,0.2);
+      padding: 14px;
+      border-radius: 15px;
+      animation: pulse 2s infinite;
+      margin-bottom: 18px;
+    }
+
+    .contador-casa {
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: rgba(255,255,255,0.18);
+      padding: 14px;
+      border-radius: 15px;
+      animation: pulse 2s infinite;
+    }
+
+    .titulo-casa {
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+      100% { transform: scale(1); }
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: subir 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes subir {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .footer {
+      margin-top: 15px;
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Nosso Amor 💖</h1>
+
+    <div class="nomes">
+      <span id="nome1">Seu Nome</span> ❤️
+      <span id="nome2">Nome dela/dele</span>
+    </div>
+
+    <p>Estamos juntos há:</p>
+
+    <div class="contador" id="contador"></div>
+    
+    Juntos desde <span id="data"></span>
+   
+   <br><br>
+    <!-- CONTADOR CASA NOVA -->
+    <div class="titulo-casa">🏡 Casa Jujubs e do Chico:</div>
+
+    <div class="contador-casa" id="contadorCasa"></div>
+    <div class="footer">
+   
+    </div>
+  </div>
+
+  <script>
+
+    // =========================
+    // CONFIGURAÇÕES
+    // =========================
+
+    const nome1 = "Chico 🚂";
+    const nome2 = "Jujubs 🌕";
+
+    const dataInicio = new Date("2026-02-08T03:47:00");
+
+    // DATA DA CASA NOVA
+    const dataCasaNova = new Date("2027-03-01T15:00:00");
+
+    // =========================
+
+    document.getElementById("nome1").innerText = nome1;
+    document.getElementById("nome2").innerText = nome2;
+
+    document.getElementById("data").innerText =
+      dataInicio.toLocaleDateString("pt-BR");
+
+    // CONTADOR RELACIONAMENTO
+    function atualizarContador() {
+
+      const agora = new Date();
+      let diff = agora - dataInicio;
+
+      const segundos = Math.floor(diff / 1000) % 60;
+      const minutos = Math.floor(diff / (1000 * 60)) % 60;
+      const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+      document.getElementById("contador").innerText =
+        `${dias} dias, ${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    // CONTADOR CASA NOVA
+    function atualizarCasaNova() {
+
+      const agora = new Date();
+      let diff = dataCasaNova - agora;
+
+      if (diff <= 0) {
+        document.getElementById("contadorCasa").innerText =
+          "🏡 O grande dia!";
+        return;
+      }
+
+      const segundos = Math.floor(diff / 1000) % 60;
+      const minutos = Math.floor(diff / (1000 * 60)) % 60;
+      const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+      document.getElementById("contadorCasa").innerText =
+        `${dias} dias, ${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    setInterval(() => {
+      atualizarContador();
+      atualizarCasaNova();
+    }, 1000);
+
+    atualizarContador();
+    atualizarCasaNova();
+
+    // CORAÇÕES
+    function criarCoracao() {
+
+      const heart = document.createElement("div");
+
+      heart.classList.add("heart");
+
+      heart.innerText = "💖";
+
+      heart.style.left = Math.random() * 100 + "vw";
+
+      heart.style.fontSize =
+        (Math.random() * 20 + 10) + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(criarCoracao, 500);
+
+  </script>
+
+</body>
+</html>
